@@ -30,7 +30,7 @@ git clone https://github.com/NVIDIA/apex.git
 cd apex
 pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" .
 conda install -c conda-forge gdcm pydicom
-pip install pytorch_lightning dicom_numpy scikit-image comet_ml pillow pytorch-msssim
+pip install pytorch_lightning dicom_numpy scikit-image pillow pytorch-msssim
 pip install git+https://github.com/aliutkus/torchinterp1d/tarball/master#egg=torchinterp1d
 pip install git+https://github.com/aliutkus/torchsearchsorted/tarball/master#egg=torchsearchsorted
 pip install git+https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer@master#egg=ranger
