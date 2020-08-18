@@ -7,7 +7,7 @@ from argparse  import ArgumentParser, Namespace
 from itertools import count
 import time, os
 
-from train_ao import Unet3D, QureDataset
+from train import Unet3D, QureDataset
 
 def predict(args):
     checkpoint_path = Path(args.checkpoint)

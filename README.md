@@ -38,6 +38,12 @@ pip install git+https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer@mast
 Note that Python<=3.6 is required for `gdcm`. If you have prepared the dataset, you don't need gdcm anymore. Also using PyTorch >= 1.6 includes automatic mixed precision within PyTorch, so Apex is no longer needed.
 It works without Apex on PyTorch=1.6 and PyTorch-Lightning=0.8.5.
 
+### Compile CUDA script (only if the given `.so` does not work)
+If you want to use our scripts to generate the training data (or use the ground truth ray caster in any way), you may need to compile the CUDA script yourself:
+```bash
+nvcc -Xcompiler -fPIC -Xcudafe --diag_suppress=esa_on_defaulted_function_ignored -shared -o raycast_volume.so raycast_volume.cu
+```
+
 ## Usage
 ### Inference using pretrained model
 First [download our weights](https://docs.google.com/uc?export=download&id=1MJ8AqKqR5Z9U3gsLpR_rJUAxfUevTVlI), then use our inference script:
@@ -48,27 +54,32 @@ Check its code to see how to implement DVAO programmatically in your script.
 
 ### Train the model yourself
 ```
-python train_ao.py /path/to/ds
+python train.py /path/to/ds
 ```
-The default parameters should lead to the model we identify as best in our paper. See `python train_ao.py --help` for possible parameters you might want to change.
+The default parameters should lead to the model we identify as best in our paper. See `python train.py --help` for possible parameters you might want to change.
 
 To reproduce the run from the paper use `--seed 1871677067`.
 
 ### Training Data (CQ500)
 The training data for DVAO uses the [CQ500 dataset](http://headctstudy.qure.ai/dataset) for CT volume data. The accompanying transfer function is randomly generated (see `tf_utils.py`) and the ground truth AO volume is computed using `raycast_cuda.py`.
 
-After downloading the dataset, you can use the `cuda_runner.py` script to generate training data by first generating a random transfer function (TF), then computing the ground truth ambient occlusion volume using that TF and lastly saving it in the format that `QureDataset` can use (see `train_ao.py`).
+After downloading the dataset, you can use the `cuda_runner.py` script to generate training data by first generating a random transfer function (TF), then computing the ground truth ambient occlusion volume using that TF and lastly saving it in the format that `QureDataset` can use (see `train.py`).
 
 ### Relevant Scripts and Files
 ```
-train_ao.py            Training script for DVAO (has argparse parameters)
-raycast_cuda.py        Computes ground truth AO
-raycast_volume.cu      CUDA code for ground truth AO
+Scripts with argparse arguments:
+train.py            Training script for DVAO
+infer.py            Inference script for DVAO
+cunda_runner.py     Generates training data in the appropriate format
+raycast_cuda.py     Computes ground truth AO
 
-Dockerfile             Dockerfile to setup our environment in a container
-peak_finder.py         Used to extract histogram peaks for random TF generation
-tf_utils.py            Functions used for our TF generation
-torch_interp.py        PyTorch CUDA-accelerated 1d interpolation from https://github.com/aliutkus/torchinterp1d
-ranger.py              Ranger optimizer (RAdam + Lookahead) from https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer
-ssim3d_torch.py        3D SSIM, adopted from https://github.com/VainF/pytorch-msssim
+Additional Functions:
+raycast_volume.cu   CUDA code for ground truth AO
+Dockerfile          Dockerfile to setup our environment in a container
+peak_finder.py      Used to extract histogram peaks for random TF generation
+extract_peaks       Persistent Homology to extract histogram peaks. (from https://www.sthu.org/blog/13-perstopology-peakdetection/index.html)
+utils.py            Utility functions
+tf_utils.py         Functions used for our TF generation
+ssim3d_torch.py     3D SSIM, adopted from https://github.com/VainF/pytorch-msssim
+volume_loader.py    Utilities to load CQ500 in its original DICOM format
 ```
