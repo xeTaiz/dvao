@@ -40,10 +40,11 @@ It works without Apex on PyTorch=1.6 and PyTorch-Lightning=0.8.5.
 
 ## Usage
 ### Inference using pretrained model
+First [download our weights](https://docs.google.com/uc?export=download&id=1MJ8AqKqR5Z9U3gsLpR_rJUAxfUevTVlI), then use our inference script:
 ```
 python infer.py /path/to/checkpoint.ckpt /path/to/item
 ```
-Check the code to see how to implement it in your script.
+Check its code to see how to implement DVAO programmatically in your script.
 
 ### Train the model yourself
 ```
