@@ -16,7 +16,7 @@ If you find our work useful, please cite our paper:
 
 ## Setup
 ### Docker
-While you can setup the environment locally, we suggest using the Docker container (`Dockerfile`).
+While you can setup the environment locally, we suggest using the Docker container (see `Dockerfile`) to run the training script.
 
 ### Local
 You will need to install PyTorch >= 1.4 and NVIDIA's [Apex](https://github.com/nvidia/apex) for mixed precision. Since apex installation is often quite tricky locally, we suggest using the Docker container.
