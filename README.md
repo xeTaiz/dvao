@@ -5,12 +5,12 @@ If you find our work useful, please cite our paper:
 @article{engel2020dvao,
   title={Deep Volumetric Ambient Occlusion},
   author={Engel, Dominik and Ropinski, Timo},
-  journal={IEEE transactions on visualization and computer graphics},
+  journal={IEEE Transactions on Visualization and Computer Graphics},
+  year={2020},
+  doi={TODO},
   volume={TODO},
   number={TODO},
   pages={TODO},
-  year={2020},
-  publisher={IEEE}
 }
 ```
 
