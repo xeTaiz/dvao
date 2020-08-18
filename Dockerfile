@@ -3,9 +3,9 @@ ARG BASE_IMAGE=pytorch/pytorch:1.3-cuda10.1-cudnn7-devel
 FROM $BASE_IMAGE
 ARG BASE_IMAGE
 RUN echo "Installing Apex on top of ${BASE_IMAGE}"
-RUN conda create -n deep-vol --clone base
-RUN echo "source activate deep-vol" > ~/.bashrc
-ENV PATH /opt/conda/envs/deep-vol/bin:$PATH
+RUN conda create -n dvao --clone base
+RUN echo "source activate dvao" > ~/.bashrc
+ENV PATH /opt/conda/envs/dvao/bin:$PATH
 # make sure we don't overwrite some existing directory called "apex"
 WORKDIR /tmp/unique_for_apex
 # uninstall Apex if present, twice to make absolutely sure :)
@@ -17,20 +17,18 @@ RUN SHA=ToUcHMe git clone https://github.com/NVIDIA/apex.git
 WORKDIR /tmp/unique_for_apex/apex
 RUN apt-get update
 RUN apt-get install -y libturbojpeg libgdcm2.6
-RUN conda run -n deep-vol pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" .
-RUN conda run -n deep-vol conda install -c conda-forge gdcm pydicom
-RUN conda run -n deep-vol pip install torchsummary test_tube dicom_numpy scikit-image comet_ml wandb pillow
-COPY ./pytorch-lightning /workspace/pytorch-lightning
-RUN conda run -n deep-vol pip install --upgrade -e file:///workspace/pytorch-lightning
-WORKDIR /workspace
+RUN conda run -n dvao pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" .
+RUN conda run -n dvao conda install -c conda-forge gdcm pydicom
+RUN conda run -n dvao pip install pytorch_lightning torchsummary dicom_numpy scikit-image pillow pytorch-msssim
+RUN conda run -n dvao pip install git+https://github.com/aliutkus/torchinterp1d/tarball/master#egg=torchinterp1d
+RUN conda run -n dvao pip install git+https://github.com/aliutkus/torchsearchsorted/tarball/master#egg=torchsearchsorted
+RUN conda run -n dvao pip install git+https://github.com/lessw2020/Ranger-Deep-Learning-Optimizer@master#egg=ranger
 
-COPY ./raycast_volume.so /workspace/raycast_volume.so
+WORKDIR /workspace
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
-ENV CONDA_DEFAULT_ENV deep-vol
+ENV CONDA_DEFAULT_ENV dvao
 SHELL ["/bin/bash", "-c"]
 COPY ./*.py /workspace/
-# ENTRYPOINT python /workspace/train_ao_nn.py --use_16bit --cos_anneal --min_epochs 5 --max_epochs 20 --train_path /workspace/train --valid_path /workspace/valid
-# RUN /bin/bash
