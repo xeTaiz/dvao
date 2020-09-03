@@ -1,5 +1,13 @@
 # Deep Volumetric Ambient Occlusion
-This is the official PyTorch implementation of [DVAO](https://dominikengel.com/dvao).
+
+![Teaser](dvao_teaser.png)
+This is the official PyTorch implementation of [DVAO](dominikengel.com/dvao).
+
+### [Project Page](dominikengel.com/dvao)
+### [Paper (TODO)]()
+### [Paper (Open Access)](https://arxiv.org/abs/2008.08345)
+### [Videos (TODO)]()
+
 If you find our work useful, please cite our paper:
 ```bibtex
 @article{engel2020dvao,
