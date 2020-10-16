@@ -4,8 +4,8 @@
 This is the official PyTorch implementation of [DVAO](https://dominikengel.com/dvao).
 
 ### [Project Page](https://dominikengel.com/dvao)
-### [Paper (TODO)]()
-### [Paper (Open Access)](https://arxiv.org/abs/2008.08345)
+### [Paper](https://ieeexplore.ieee.org/document/9222376)
+### [Pre-Print (Open Access)](https://arxiv.org/abs/2008.08345)
 ### [Videos (TODO)]()
 
 If you find our work useful, please cite our paper:
@@ -15,7 +15,7 @@ If you find our work useful, please cite our paper:
   author={Engel, Dominik and Ropinski, Timo},
   journal={IEEE Transactions on Visualization and Computer Graphics},
   year={2020},
-  doi={TODO},
+  doi={10.1109/TVCG.2020.3030344},
 }
 ```
 
