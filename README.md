@@ -6,7 +6,6 @@ This is the official PyTorch implementation of [DVAO](https://dominikengel.com/d
 ### [Project Page](https://dominikengel.com/dvao)
 ### [Paper](https://ieeexplore.ieee.org/document/9222376)
 ### [Pre-Print (Open Access)](https://arxiv.org/abs/2008.08345)
-### [Videos (TODO)]()
 
 If you find our work useful, please cite our paper:
 ```bibtex
