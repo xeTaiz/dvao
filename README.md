@@ -50,7 +50,7 @@ nvcc -Xcompiler -fPIC -Xcudafe --diag_suppress=esa_on_defaulted_function_ignored
 
 ## Usage
 ### Inference using pretrained model
-First [download our weights](https://docs.google.com/uc?export=download&id=1MJ8AqKqR5Z9U3gsLpR_rJUAxfUevTVlI), then use our inference script:
+First [download our weights](https://share.d0me.xyz/Share/dvao_preclassified.ckpt), then use our inference script:
 ```
 python infer.py /path/to/checkpoint.ckpt /path/to/item
 ```
